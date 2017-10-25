@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<ol th:remove="all-but-first">
+    <li th:each="ua : ${uaList}" th:classappend="${uaStat.even}? 'even'">
+        姓名：[(${ua.realname})]，<span th:text="${ua.realname}">性别</span> 性别：[(#{|gender.${ua.gender}|})]
+    </li>
+</ol>
+
+<div th:switch="${role}">
+    <p th:case="'admin'">User is an administrator</p>
+    <p th:case="#{roles.manager}">User is a manager</p>
+    <p th:case="*">User is some other thing</p>
+</div>
+
+<div>
+    <p th:text="${show}? 'this is show' : 'ddd'">
+    </p>
+    <p th:text="${show}">
+    </p>
+</div>
+
+<div>
+    <p>The message is "[[#{home.welcome}]]"</p>
+</div>
+
+<div>
+    <p th:inline="none">A double array looks like this: [[1, 2, 3], [4, 5]]!</p>
+</div>
+
+<script th:inline="javascript">
+    var username = /*[[#{home.welcome}]]*/ "ddd";
+</script>
+</body>
+
+</html>
